@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load loft_tags %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block slider %}
+{% endblock slider %}
+
+
+{% block main %}
+
+<main class="main">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+
+            <div class="col-5">
+                <form action="{% url 'payment' %}" method="post">
+                    {% csrf_token %}
+                    {{ shipping_form.as_p }}
+                    <hr>
+                    {{ customer_form.as_p }}
+                    <button class="btn" type="submit">Оплатить</button>
+                </form>
+            </div>
+
+            <div class="col-6">
+                    <div class="card p-3">
+                        <h4 class="text-center">Информация о заказе</h4>
+                        <div class="card-body">
+                            {% for item in items %}
+                            <div class="d-flex justify-content-between">
+                                <p style="width:150px;">{{ item.product.title }}</p>
+                                <p>Количество: <span>{{ item.quantity }}</span></p>
+                                <p>На сумму: <span>{% get_normal_price item.get_total_price %}₽</span></p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <h4 class="text-center">Сумма заказа: {% get_normal_price order.get_cart_total_price %}₽</h4>
+                    </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+
+
+
+{% endblock main %}
+
+
+
+
+

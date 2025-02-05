@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block slider %}
+
+{% endblock slider %}
+
+
+{% block main %}
+
+<main class="main">
+    <div class="container">
+        <section class="products">
+            <h2 class="products__title">{{ title }}</h2>
+            {% if products %}
+            <div class="products__content">
+                {% for product in products %}
+                {% include 'loft/components/_card.html' %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <h4 style="text-align:center;">У вас пока нет избранных товаров</h4>
+            {% endif %}
+            <!-- /.products__content -->
+
+
+        </section>
+        <!-- /.products -->
+    </div>
+    <!-- /.container -->
+</main>
+
+{% endblock main %}

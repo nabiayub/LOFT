@@ -1,0 +1,54 @@
+{% load loft_tags %}
+<div class="products_filter">
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="dropdown pt-2 pt-lx-0">
+                <button class="products_filter-dropdown dropdown-toggle rounded" type="button" id="dropdownColor"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if color %}{{ color }}{% else %}Цвет{% endif %}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownColor">
+                    {% for color in colors %}
+                    <li><a class="dropdown-item" href="?{% query_params color=color page=1 %}">{{ color }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="dropdown pt-2 pt-lx-0">
+                <button class="products_filter-dropdown dropdown-toggle rounded" type="button"
+                        id="dropdownStrapType" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if kind %}{{ kind }}{% else %}Вид мебели{% endif %}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownStrapType">
+                    {% for kind in kinds %}
+                    <li><a class="dropdown-item" href="?{% query_params kind=kind page=1 %}">{{ kind }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="dropdown pt-2 pt-lx-0">
+                <button class="products_filter-dropdown dropdown-toggle rounded" type="button" id="dropdownSort"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if from %}{{ from }}{% else %}Цена от:{% endif %}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownSort">
+                    {% for price in prices %}
+                    <li><a class="dropdown-item" href="?{% query_params from_p=price page=1 %}">{{ price }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            <div class="dropdown pt-2 pt-lx-0">
+                <button class="products_filter-dropdown dropdown-toggle rounded" type="button"
+                        id="dropdownWatchType" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if till %}{{ till }}{% else %}Цена до:{% endif %}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownWatchType">
+                    {% for price in prices %}
+                    <li><a class="dropdown-item" href="?{% query_params till_p=price page=1 %}">{{ price }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

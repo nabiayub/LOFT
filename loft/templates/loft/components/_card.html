@@ -1,0 +1,52 @@
+{% load loft_tags %}
+{% if request.user.is_authenticated %}
+{% get_favorite_products request.user as favourites %}
+{% endif %}
+<div class="products__item">
+    <a href="{% url 'to_favorite' product.slug %}" class="products__item-heart">
+        <svg width="20px" height="20px" viewBox="0 0 28 24"
+             fill="{% if product in favourites %}#ff0000{% else %}none{% endif %}" xmlns="http://www.w3.org/2000/svg">
+            <path
+                    d="M8.375 1C4.57813 1 1.5 4.07813 1.5 7.875C1.5 14.75 9.625 21 14 22.4538C18.375 21 26.5 14.75 26.5 7.875C26.5 4.07813 23.4219 1 19.625 1C17.3 1 15.2438 2.15438 14 3.92125C13.3661 3.01825 12.5239 2.28131 11.5447 1.77281C10.5656 1.2643 9.47831 0.999222 8.375 1Z"
+                    stroke="{% if product in favourites %}none{% else %}#000000{% endif %}" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+
+    <a href="{{ product.get_absolute_url }}"> <img src="{{ product.get_product_image }}" alt=""
+                                                   class="products__item-img"></a>
+    <div class="products__item-text">
+        <h3 class="products__item-title">{{ product.title }}</h3>
+        <div class="products__item-desrc">{{ product.category }}</div>
+        <div class="products__item-price">{% get_normal_price product.price %}₽</div>
+    </div>
+    <!-- /.products__item-text -->
+    <div class="products__item-options products__options">
+        <h4 class="products__options-title">Размеры</h4>
+        <ul class="products__options-list options__list">
+
+            <li class="options__list-item">
+                <p class="options__list-text">
+                    ШИРИНА
+                </p>
+                <span class="size">{{ product.width }}cm</span>
+            </li>
+            <li class="options__list-item">
+                <p class="options__list-text">
+                    ГЛУБИНА
+                </p>
+                <span class="size">{{ product.length }}cm</span>
+            </li>
+            <li class="options__list-item">
+                <p class="options__list-text">
+                    ВЫСОТА
+                </p>
+                <span class="size">{{ product.height }}cm</span>
+            </li>
+        </ul>
+        <a href="{% url 'to_cart' product.slug 'add' %}" class="options__btn btn">Добавить в корзину</a>
+    </div>
+    <!-- /.products__options -->
+</div>
+
+
+

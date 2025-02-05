@@ -1,0 +1,21 @@
+{% load loft_tags %}
+<ul class="header__list _categories">
+    {% get_categories as categories %}
+    {% for category in categories %}
+    <li>
+        <a href="{{ category.get_absolute_url }}" class="header__list-links">
+                                <span class="header__list-img">
+                                    <img src="{{ category.get_icon }}" alt="icons">
+                                </span>
+            {{ category.title }}
+        </a>
+    </li>
+    {% endfor %}
+
+
+    <li>
+        <a href="#!" class="header__list-links">
+            акция
+        </a>
+    </li>
+</ul>

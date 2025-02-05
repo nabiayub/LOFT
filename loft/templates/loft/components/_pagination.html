@@ -1,0 +1,28 @@
+{% load static %}
+{% load loft_tags %}
+<div class="pagination">
+    <ul class="pagination_list">
+        {% if page_obj.has_previous and page_obj.paginator.num_pages > 2 %}
+        <li class="link_p">
+            <a href="?{% query_params page=page_obj.previous_page_number %}"><img src="{% static 'loft/icons/caret-left-fill.svg' %}" alt=""></a>
+        </li>
+        {% endif %}
+
+        {% for page in page_obj.paginator.page_range %}
+        {% if page == page_obj.number %}
+        <li class="link_p link-active"><a href="">{{ page }}</a></li>
+        {% elif page > page_obj.number|add:-3 and page < page_obj.number|add:+3 %}
+        <li class="link_p"><a href="?{% query_params page=page %}">{{ page }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next and page_obj.paginator.num_pages > 2 %}
+        <li class="link_p">
+            <a href="?{% query_params page=page_obj.next_page_number %}"><img src="{% static 'loft/icons/caret-right-fill.svg' %}" alt=""></a>
+        </li>
+        {% endif %}
+
+    </ul>
+</div>
+
+

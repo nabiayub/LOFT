@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <!-- Css - Стили -->
+    {% include 'components_base/_style.html' %}
+
+</head>
+
+<body>
+{% include 'components_base/_nav.html' %}
+
+<!-- /.nav -->
+
+<div class="wrapper">
+
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+
+                {% include 'components_base/_header__bar.html' %}
+
+
+                {% include 'components_base/_header_categories.html' %}
+
+                <!-- /.nav__catigories -->
+                {% block slider %}
+                {% include 'components_base/_slider.html' %}
+                {% endblock slider %}
+
+            </div>
+            <!-- /.header__content -->
+        </div>
+        <!-- /.container -->
+    </header>
+    <!-- /.header -->
+    {% block main %}
+    {% endblock main %}
+    <!-- /.main -->
+    {% include 'layout/footer.html' %}
+
+    <!-- /.footer -->
+</div>
+<!-- /.wrapper -->
+{% include 'components_base/_script.html' %}
+
+<!-- Js - скрипты -->
+</body>
+
+</html>

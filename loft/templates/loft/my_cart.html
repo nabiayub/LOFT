@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load loft_tags %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block slider %}
+
+{% endblock slider %}
+
+
+{% block main %}
+
+<main class="main">
+            <div class="container">
+                <section class="basket">
+                    <div class="basket__text">
+                        <h1 class="basket__title">{{ title }}</h1>
+                        <span class="basket__count"><span>{{ order.get_cart_total_quantity }}</span> предмета</span>
+                    </div>
+                    <div class="basket__items">
+
+                        {% for item in products %}
+                        <div class="basket__item">
+                            <a href="#!" class="basket__item-img">
+                                <img src="{{ item.product.get_product_image }}" alt="product">
+                            </a>
+                            <div class="basket__item-content">
+                                <div class="basket__item-text">
+                                    <h2 class="basket__item-title">{{ item.product.title }}</h2>
+                                    <p class="basket__item-price">
+                                        <span class="discount">
+                                            {% if item.product.discount %}
+                                            <i class="far fa-badge-percent"></i>
+                                            -{{ item.product.discount }}%
+                                            {% endif %}
+
+                                        </span>
+
+                                        <span class="old__price"><span>{% get_normal_price item.total_price %}</span>₽</span>
+                                        <span class="price"><span>{% get_normal_price item.get_total_price  %}</span>₽</span>
+
+                                    </p>
+                                </div>
+                                <div class="basket__options">
+                                    <p class="basket__options-color">
+                                        Цвет:
+                                        <span class="color__name">{{ item.product.color_name }}</span>
+                                        <span class="color__block" style="background: {{ item.product.color_code }}; border:0.3px solid grey;"></span>
+                                    </p>
+                                    <p class="basket__options-count">
+
+                                        Количество:
+                                        <a href="{% url 'to_cart' item.product.slug 'delete' %}" class="btn minus_plus">-</a>
+                                        <span>{{ item.quantity }}</span>
+                                        <a href="{% url 'to_cart' item.product.slug 'add' %}" class="btn minus_plus">+</a>
+                                    </p>
+
+                                    <p class="basket__options-size">
+                                        Размер(Ш×Д×В): <span>{{ item.product.width }} СМ × {{ item.product.length }} СМ × {{ item.product.height }} СМ</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="{% url 'delete_product' item.pk item.order.id %}" class="basket__delete">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <form class="products__form">
+                        <span>Итоговая стоимость:<span class="products__form-price">{% get_normal_price order.get_cart_total_price %}₽</span> </span>
+                        {% if products %}
+                        <a href="{% url 'checkout' %}" class="btn products__form-btn">Оформить заказ</a>
+                        {% endif %}
+                    </form>
+                </section>
+                <!-- /.basket -->
+
+
+                <!-- /.products -->
+
+            </div>
+            <!-- /.container -->
+        </main>
+
+{% endblock main %}

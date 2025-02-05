@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block slider %}
+<div class="product__slider">
+    {% include 'loft/components/_product_slider.html'  %}
+
+    {% include 'loft/components/_product_info.html'  %}
+
+
+</div>
+{% endblock slider %}
+
+
+{% block main %}
+
+
+<main class="main">
+    <div class="container">
+        <section class="products">
+            <h2 class="products__title">Похожие товары</h2>
+            <div class="products__content">
+
+                <!-- /.products__item -->
+
+
+                {% for product in products %}
+                {% include 'loft/components/_card.html' %}
+                {% endfor %}
+
+
+
+
+            </div>
+            <!-- /.products__content -->
+        </section>
+        <!-- /.products -->
+    </div>
+    <!-- /.container -->
+</main>
+
+{% endblock main %}

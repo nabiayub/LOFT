@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block slider %}
+
+{% endblock slider %}
+
+
+{% block main %}
+
+<main class="main">
+            <div class="registeration">
+                <div class="container">
+                    <div class="registeration__content">
+                        <form class="registeration__form active" method="post">
+                            {% csrf_token %}
+                            <h2 class="registeration__title products__title">{{ title }}</h2>
+                            <div class="registeration__form-grid">
+
+                                <div class="input__title">
+                                    <h2>Логин</h2>
+                                    {{  form.username }}
+                                </div>
+
+                                <div class="input__title">
+                                    <h2>Имя</h2>
+                                    {{  form.first_name }}
+                                </div>
+
+                                <div class="input__title">
+                                    <h2>Фамилия</h2>
+                                    {{  form.last_name }}
+                                </div>
+                                <div class="input__title">
+                                    <h2>E-mail</h2>
+                                    {{  form.email }}
+                                </div>
+
+                                <div class="input__title">
+                                    <h2>Номер телефона</h2>
+                                    <input name="phone" type="tel" class="contact__section-input">
+                                </div>
+
+                                <div class="input__title">
+                                    <h2>Придумайте пароль</h2>
+                                    {{  form.password1 }}
+                                </div>
+                                <div class="input__title">
+                                    <h2>Подтвердить пароль</h2>
+                                    {{  form.password2 }}
+                                </div>
+
+                            </div>
+
+                            <div class="registeration__btns">
+
+                                <button class="btn registeration__btn" type="submit">Подтвердить</button>
+                                <a href="{% url 'login' %}" class="registeration__links">Уже есть аккаунт? </a>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+{% endblock main %}
+
+
+

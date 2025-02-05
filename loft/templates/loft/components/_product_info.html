@@ -1,0 +1,79 @@
+{% load static %}
+{% load loft_tags %}
+{% get_product_colors product.model as colors %}
+{% if request.user.is_authenticated %}
+{% get_favorite_products request.user as favourites %}
+{% endif %}
+
+<div class="product__slider-parameters">
+    <div class="product__raiting">
+        <div class="product__raiting-body">
+            <div class="product__raiting-active"></div>
+            <div class="product__raiting-items">
+                <input type="radio" name="raiting" value="1" class="product__raiting-links">
+                <input type="radio" name="raiting" value="2" class="product__raiting-links">
+                <input type="radio" name="raiting" value="3" class="product__raiting-links">
+                <input type="radio" name="raiting" value="4" class="product__raiting-links">
+                <input type="radio" name="raiting" value="5" class="product__raiting-links">
+            </div>
+        </div>
+        <div class="product__raiting-value">3.4</div>
+    </div>
+    <h1 class="product__title">{{ product.title }}</h1>
+    <span class="product__categories">{{ product.kind }}</span>
+    <div class="product__links">
+        <h2 class="product__links-price"><span>{% get_normal_price product.price %}</span> ₽</h2>
+        <a href="#!" class="product__links-buy">Купить</a>
+        <a href="{% url 'to_favorite' product.slug %}" class="products__item-heart product__links-add">
+           <svg width="20px" height="20px" viewBox="0 0 28 24"
+             fill="{% if product in favourites %}#ff0000{% else %}none{% endif %}" xmlns="http://www.w3.org/2000/svg">
+            <path
+                    d="M8.375 1C4.57813 1 1.5 4.07813 1.5 7.875C1.5 14.75 9.625 21 14 22.4538C18.375 21 26.5 14.75 26.5 7.875C26.5 4.07813 23.4219 1 19.625 1C17.3 1 15.2438 2.15438 14 3.92125C13.3661 3.01825 12.5239 2.28131 11.5447 1.77281C10.5656 1.2643 9.47831 0.999222 8.375 1Z"
+                    stroke="{% if product in favourites %}none{% else %}#000000{% endif %}" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+            <span style="margin-left: 10px;">Добавить в желаемое</span>
+        </a>
+    </div>
+
+    <ul class="paremeters__list">
+        <li class="paremetes__list-item">
+            <h3 class="paremeters__list-title">Цвет</h3>
+            <a href="#!" class="paremeters__list-btn">
+                <div class="paremeters__color" style="background: {{ product.color_code }}"></div>
+                <img src="{% static 'loft/assets/icons/arrow-black.svg' %}" alt="arrow-down">
+            </a>
+            <div class="list__drop">
+                {% for color in colors %}
+                {% if color != product.color_code %}
+                <a class="color_product" href="{% url 'by_color' color product.model %}"
+                   style="background: {{ color }};"></a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </li>
+        <li class="paremetes__list-item">
+            <h3 class="paremeters__list-title">В наличии</h3>
+            <a href="#!" class="paremeters__list-btn">
+                <div class="paremeters__count"><span>{{ product.quantity }}</span></div>
+                <!--                    <img src="{% static 'loft/assets/icons/arrow-black.svg' %}" alt="arrow-down">-->
+            </a>
+            <!--                <div class="list__drop"></div>-->
+
+        </li>
+        <li class="paremetes__list-item">
+            <h3 class="paremeters__list-title">Размер (Д × Ш × В)</h3>
+            <a href="#!" class="paremeters__list-btn">
+                <div class="paremeters__size">{{ product.length }} СМ × {{ product.width }} СМ × {{ product.height }}
+                    СМ
+                </div>
+                <img src="{% static 'loft/assets/icons/arrow-black.svg' %}" alt="arrow-down">
+            </a>
+            <div class="list__drop"></div>
+        </li>
+    </ul>
+
+    <p class="product__descr">
+        <span class="product__descr-title">Описание</span>
+        {{ product.description }}
+    </p>
+</div>

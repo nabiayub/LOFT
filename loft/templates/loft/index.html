@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load loft_tags %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+
+
+
+{% block main %}
+<main class="main">
+    <div class="container">
+        <section class="products">
+            <h2 class="products__title">Хиты продаж</h2>
+            <div class="products__content">
+
+                <!-- /.products__item -->
+                {% for category in categories %}
+                {% get_products category as products %}
+                {% for product in products %}
+                {% include 'loft/components/_card.html' %}
+
+                {% endfor %}
+                {% endfor %}
+
+
+
+            </div>
+            <!-- /.products__content -->
+        </section>
+        <!-- /.products -->
+    </div>
+    <!-- /.container -->
+</main>
+{% endblock main %}

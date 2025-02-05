@@ -1,0 +1,56 @@
+{%  load static %}
+
+<div class="header__bar">
+    <a href="#!" class="nav__bars-open">
+        <span class="burger"></span>
+        <span class="burger"></span>
+        <span class="burger"></span>
+    </a>
+
+    <a href="{% url 'main' %}" class="logo">
+        <img src="{% static 'loft/assets/icons/LOGO.svg' %}" alt="logo">
+    </a>
+    <form class="header__search">
+        <i class="fal fa-search"></i>
+        <input type="text" class="header__search-txt" placeholder="Поиск">
+    </form>
+
+    <ul class="header__list">
+        <li>
+            <a href="#" class="header__list-item _truck">
+                <i class="far fa-truck"></i>
+                Доставка
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'favorite' %}" class="header__list-item {% if 'favorite' in request.path %}active{% endif %}" id="_heart">
+
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'my_cart' %}" class="header__list-item {% if 'my_cart' in request.path %}active{% endif %}" id="_bag">
+
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'profile' %}"
+               class="header__list-item {% if 'profile' in request.path %}active{% endif %}" id="_profile">
+
+            </a>
+        </li>
+
+        {% if not request.user.is_authenticated %}
+        <li>
+            <a href="{% url 'login' %}" >
+                <img src="{% static 'loft/icons/circum_login.svg' %}" alt="">
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'logout' %}">
+                <img src="{% static 'loft/icons/logout.svg' %}" alt="">
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
